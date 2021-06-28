@@ -1,0 +1,27 @@
+package com.practice.mycontactapi.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.practice.mycontactapi.model.Contact;
+
+@RestController
+@RequestMapping("/api/v1/")
+public class ContactsController {
+	
+	@GetMapping("/contacts-info")
+	public String apiInfo() {
+		return "Contacts API is up and running";
+	}
+	
+	@GetMapping("/contacts")
+	public List<Contact> getContacts(){
+		return List.of(new Contact("1","John","john@allstate.com","Friend","789456","url"),
+				new Contact("2","Mike","mike@allstate.com","Friend","123465","url"));
+		
+	}
+	
+}

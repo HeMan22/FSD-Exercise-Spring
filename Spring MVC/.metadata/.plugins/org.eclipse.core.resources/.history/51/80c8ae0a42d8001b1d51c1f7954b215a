@@ -1,0 +1,11 @@
+package com.practice.mycontactapi.model;
+
+public class Contact {
+
+	private String contactID;
+	private String name;
+	private String email;
+	private String category;
+	private String phone;
+	private String imageUrl;
+}

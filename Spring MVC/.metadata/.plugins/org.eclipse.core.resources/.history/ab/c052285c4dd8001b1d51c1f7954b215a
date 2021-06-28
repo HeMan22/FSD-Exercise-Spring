@@ -1,0 +1,43 @@
+package com.practice.mycontactapi.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.practice.mycontactapi.model.Contact;
+import com.practice.mycontactapi.service.ContactService;
+
+@RestController
+@RequestMapping("/api/v1/")
+public class ContactsController {
+
+	private ContactService service;
+	
+	@Autowired
+	public ContactsController(ContactService service) {
+		super();
+		this.service = service;
+	}
+
+	@GetMapping("/contacts-info")
+	public String apiInfo() {
+		return "Contacts API is up and running";
+	}
+
+	@GetMapping(path = "/contacts", produces = "application/json") // produces is optional to write
+	public List<Contact> getContacts() {
+		return service.getAllContacts();
+	}
+
+	// public @ResponseBody List<Contact> getContacts(){ When using @Controller
+	// annotation inplace of @RestController
+	
+	@GetMapping("/contacts/{contactId}")
+	public Contact getContact(@PathVariable String contactId) {
+		return service.getContactById(contactId);
+	}
+
+}

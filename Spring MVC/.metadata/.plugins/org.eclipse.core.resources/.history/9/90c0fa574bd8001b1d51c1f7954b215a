@@ -1,0 +1,18 @@
+package com.practice.mycontactapi.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.practice.mycontactapi.model.Contact;
+
+@Service
+public class ContactServiceImpl implements ContactService{
+
+	@Override
+	public List<Contact> getAllContacts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.practice.mycontactapi.service;
+
+import java.util.List;
+
+import com.practice.mycontactapi.model.Contact;
+
+public interface ContactService {
+	public List<Contact> getAllContacts();
+	Contact getContact(String contactId);
+}

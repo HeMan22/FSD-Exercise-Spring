@@ -1,0 +1,5 @@
+package com.practice.mycontactapi.service;
+
+public interface ContactService {
+
+}

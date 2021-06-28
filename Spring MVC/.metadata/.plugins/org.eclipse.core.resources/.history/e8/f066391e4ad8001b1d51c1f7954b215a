@@ -1,0 +1,5 @@
+package com.practice.mycontactapi.repository;
+
+public class ContactsRepository {
+
+}

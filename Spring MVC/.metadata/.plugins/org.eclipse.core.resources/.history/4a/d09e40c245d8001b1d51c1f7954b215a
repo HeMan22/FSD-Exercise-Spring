@@ -1,0 +1,60 @@
+package com.practice.mycontactapi.model;
+
+public class Contact {
+
+	private String contactID;
+	private String name;
+	private String email;
+	private String category;
+
+	public String getContactID() {
+		return contactID;
+	}
+
+	public void setContactID(String contactID) {
+		this.contactID = contactID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	private String phone;
+	private String imageUrl;
+}

@@ -1,0 +1,13 @@
+package com.practice.mycontactapi.service;
+
+import java.util.List;
+
+public class ContactServiceImpl implements ContactService{
+
+	@Override
+	public List<Contact> getAllContacts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
