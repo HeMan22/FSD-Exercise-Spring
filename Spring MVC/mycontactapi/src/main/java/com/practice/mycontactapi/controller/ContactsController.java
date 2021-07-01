@@ -2,6 +2,8 @@ package com.practice.mycontactapi.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.practice.mycontactapi.exception.ContactExistsException;
 import com.practice.mycontactapi.exception.ContactNotFoundException;
 import com.practice.mycontactapi.model.Contact;
 import com.practice.mycontactapi.service.ContactService;
@@ -55,7 +58,7 @@ public class ContactsController {
 	}
 
 	@PostMapping("/contacts")
-	public ResponseEntity<Contact> addContact(@RequestBody Contact newContact) {
+	public ResponseEntity<Contact> addContact(@Valid @RequestBody Contact newContact) throws ContactExistsException {
 
 		return new ResponseEntity(service.addContact(newContact), HttpStatus.CREATED);
 	}

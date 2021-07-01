@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.practice.mycontactapi.exception.ContactNotFoundException;
+import com.practice.mycontactapi.exception.ContactExistsException;
 import com.practice.mycontactapi.model.Contact;
 import com.practice.mycontactapi.repository.ContactsRepository;
 
@@ -32,16 +33,24 @@ public class ContactServiceImpl implements ContactService {
 	@Override
 	public Contact getContactById(String contactId) throws ContactNotFoundException {
 		Contact contact = repository.CONTACTS_REPO.get(contactId);
-		if(contact==null) {
+		if (contact == null) {
 			throw new ContactNotFoundException("Contact Not Found");
 		}
-		
+
 		return contact;
 	}
 
 	@Override
-	public Contact addContact(Contact newContact) {
+	public Contact addContact(Contact newContact) throws ContactExistsException {
 		newContact.setContactID(UUID.randomUUID().toString());
+
+		boolean contactExists=repository.CONTACTS_REPO.values().stream()
+				.anyMatch(contact -> contact.getEmail().equals(newContact.getEmail()));
+		
+		if(contactExists) {
+			throw new ContactExistsException("Contact with Email Already Exists " + newContact.getEmail());
+		}
+
 		repository.CONTACTS_REPO.put(newContact.getContactID(), newContact);
 		return repository.CONTACTS_REPO.get(newContact.getContactID());
 	}

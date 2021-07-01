@@ -1,14 +1,20 @@
 package com.practice.mycontactapi.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Contact {
 
-
-	@JsonProperty(value="contact_ID")
+	@JsonProperty(value = "contact_ID")
 	private String contactID;
 	private String name;
+	@NotEmpty (message="{email.notempty}")
 	private String email;
+	@NotNull
+	@Size(min = 3, max = 20, message="{category.size}")
 	private String category;
 
 	public Contact() {

@@ -2,6 +2,7 @@ package com.practice.mycontactapi.service;
 
 import java.util.List;
 
+import com.practice.mycontactapi.exception.ContactExistsException;
 import com.practice.mycontactapi.exception.ContactNotFoundException;
 import com.practice.mycontactapi.model.Contact;
 
@@ -10,7 +11,7 @@ public interface ContactService {
 	
 	Contact getContactById(String contactId) throws ContactNotFoundException;
 	
-	Contact addContact(Contact addContact);
+	Contact addContact(Contact addContact) throws ContactExistsException;
 
 	public void deleteContact(String contactId);
 
