@@ -14,57 +14,68 @@ import com.practice.mycontactapi.model.Contact;
 import com.practice.mycontactapi.repository.ContactsRepository;
 
 @Service
-public class ContactServiceImpl implements ContactService {
-
+public class ContactServiceImpl implements ContactService{
+	
 	private ContactsRepository repository;
-
+	
+	
 	@Autowired
 	public ContactServiceImpl(ContactsRepository repository) {
 		super();
 		this.repository = repository;
 	}
 
+
+
 	@Override
 	public List<Contact> getAllContacts() {
-
-		return new ArrayList<Contact>(repository.CONTACTS_REPO.values());
+		return new ArrayList<Contact>(repository.getContactsRepo().values());
 	}
+
 
 	@Override
 	public Contact getContactById(String contactId) throws ContactNotFoundException {
-		Contact contact = repository.CONTACTS_REPO.get(contactId);
-		if (contact == null) {
-			throw new ContactNotFoundException("Contact Not Found");
+		Contact contact = repository.getContactsRepo().get(contactId);
+		if(contact == null) {
+			throw new ContactNotFoundException("Contact not found");
 		}
-
 		return contact;
 	}
 
-	@Override
-	public Contact addContact(Contact newContact) throws ContactExistsException {
-		newContact.setContactID(UUID.randomUUID().toString());
 
-		boolean contactExists=repository.CONTACTS_REPO.values().stream()
-				.anyMatch(contact -> contact.getEmail().equals(newContact.getEmail()));
+	@Override
+	public Contact addContact(Contact newContact) throws ContactExistsException{
+		newContact.setContactID(UUID.randomUUID().toString());
+		
+		boolean contactExists = repository.getContactsRepo()
+		.values().stream()
+		.anyMatch(contact -> contact.getEmail().equals(newContact.getEmail()));
 		
 		if(contactExists) {
-			throw new ContactExistsException("Contact with Email Already Exists " + newContact.getEmail());
+			throw new ContactExistsException("Contact with Email already exists : " + newContact.getEmail());
 		}
-
-		repository.CONTACTS_REPO.put(newContact.getContactID(), newContact);
-		return repository.CONTACTS_REPO.get(newContact.getContactID());
+		
+		
+		repository.getContactsRepo().put(newContact.getContactID(), newContact);
+		return repository.getContactsRepo().get(newContact.getContactID());
 	}
+
 
 	@Override
 	public void deleteContact(String contactId) {
-		repository.CONTACTS_REPO.remove(contactId);
+		repository.getContactsRepo().remove(contactId);
+		
 	}
+
 
 	@Override
 	public List<Contact> getAllContactsByCategory(String category) {
-		return new ArrayList<Contact>(repository.CONTACTS_REPO.values()).stream()
-				.filter(contact -> contact.getCategory().equals(category)).collect(Collectors.toList());
 
+		return new ArrayList<Contact>(repository.getContactsRepo().values())
+				.stream()
+				.filter(contact -> contact.getCategory().equals(category))
+				.collect(Collectors.toList());
+		
 	}
 
 }

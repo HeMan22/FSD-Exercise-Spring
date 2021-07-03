@@ -7,13 +7,15 @@ import com.practice.mycontactapi.exception.ContactNotFoundException;
 import com.practice.mycontactapi.model.Contact;
 
 public interface ContactService {
-	public List<Contact> getAllContacts();
+	
+	List<Contact> getAllContacts();
 	
 	Contact getContactById(String contactId) throws ContactNotFoundException;
-	
-	Contact addContact(Contact addContact) throws ContactExistsException;
 
-	public void deleteContact(String contactId);
+	Contact addContact(Contact newContact) throws ContactExistsException;
 
-	public List<Contact> getAllContactsByCategory(String Category);
+	void deleteContact(String contactId);
+
+	List<Contact> getAllContactsByCategory(String category);
+
 }
